@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ForgeStudio | Laser & CNC Image Toolkit</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div><span class="mark">✦</span><strong>ForgeStudio</strong><small> laser & CNC image toolkit</small></div>
+    <span id="status" class="status">Ready</span>
+  </header>
+  <main class="layout">
+    <aside class="panel sidebar">
+      <h2>Workspace</h2>
+      <label class="dropzone" id="dropzone">
+        <input id="fileInput" type="file" accept="image/*" multiple>
+        <span class="upload-icon">↑</span><b>Drop artwork here</b><small>or click to browse · JPG, PNG, WEBP, TIFF</small>
+      </label>
+      <div id="fileList" class="file-list"></div>
+      <hr>
+      <h2>AI generator</h2>
+      <textarea id="prompt" placeholder="Describe a clean, high-contrast engraving design..."></textarea>
+      <div class="row"><select id="model"><option value="dall-e-3">DALL·E 3</option><option value="stable-diffusion">Stable Diffusion</option></select><select id="size"><option>1024x1024</option><option>1792x1024</option><option>1024x1792</option></select></div>
+      <button id="generate" class="primary">Generate artwork</button>
+    </aside>
+    <section class="content">
+      <div class="panel hero"><div><p class="eyebrow">PRODUCTION WORKSPACE</p><h1>Turn ideas into <em>cut-ready</em> artwork.</h1><p>Prepare images for engraving, carving, signs, and makerspace projects.</p></div><div class="hero-badge">SVG-ready<br><b>50 MB</b> uploads</div></div>
+      <div class="toolbar panel"><button class="tool active" data-tab="prepare">▧ Prepare</button><button class="tool" data-tab="adjust">◐ Adjust</button><button class="tool" data-tab="effects">✧ Effects</button><button class="tool" data-tab="export">⇩ Export</button></div>
+      <div class="panel workspace">
+        <div class="preview-wrap"><div id="emptyState"><span>✦</span><h3>Your canvas is ready</h3><p>Upload an image or generate artwork to begin.</p></div><img id="preview" hidden alt="Artwork preview"></div>
+        <div id="prepare" class="controls tab"><h2>Prepare for the machine</h2><div class="control-grid"><button data-action="remove-bg">Remove background</button><button data-action="grayscale">Grayscale</button><button data-action="normalize">Auto enhance</button><button data-action="sharpen">Sharpen</button><button data-action="upscale">AI upscale 2×</button><button data-action="posterize">Posterize</button></div></div>
+        <div id="adjust" class="controls tab hidden"><h2>Tune the image</h2><label>Brightness <input id="brightness" type="range" min="-100" max="100" value="0"><output>0</output></label><label>Saturation <input id="saturation" type="range" min="-100" max="100" value="0"><output>0</output></label><label>Hue <input id="hue" type="range" min="-180" max="180" value="0"><output>0</output></label><button id="apply-adjust" class="primary">Apply adjustments</button></div>
+        <div id="effects" class="controls tab hidden"><h2>Effects & transforms</h2><div class="control-grid"><button data-action="blur">Soften / blur</button><button data-action="rotate">Rotate 90°</button><button data-action="flip">Flip vertical</button><button data-action="convert">Convert to PNG</button></div></div>
+        <div id="export" class="controls tab hidden"><h2>Download your result</h2><p>PNG keeps transparency and is recommended for most laser workflows. Use grayscale or posterize for a stronger burn.</p><button id="download" class="primary" disabled>Download current artwork</button></div>
+      </div>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
